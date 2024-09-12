@@ -10,12 +10,13 @@ import java.util.List;
 public class Strawberry extends Actor
 {
     int border = getImage().getWidth() / 2;
+    int spd = -3;
     
     public void act()
     {
         MyWorld world = (MyWorld) getWorld();
         
-        move(-3);
+        move(spd);
         if (getX() < -border) {
             SadFace face = new SadFace();
             world.addObject(face, 300, 200);
@@ -28,6 +29,7 @@ public class Strawberry extends Actor
         } else if (isTouching(Hero.class)) {
             world.incrementScore();
             resetStrawberry();
+            spd = Math.max(spd - 1, -30);
         }
     }
     
